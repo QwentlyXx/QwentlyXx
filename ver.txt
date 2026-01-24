@@ -8,14 +8,15 @@ local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))
 local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
 local Options = Library.Options
 local Toggles = Library.Toggles
-Library.ForceCheckbox = false
+Library.ForceCheckbox = true
 local Window = Library:CreateWindow({
 	Title = " Qwently Client",
 	Footer = "Qwently Client",
 	NotifySide = "Right",
-	ShowCustomCursor = true,
+	ShowCustomCursor = false,
 })
 local Tabs = {
+	Key = Window:AddKeyTab("Key System"),
 	Defense = Window:AddTab("defense", "shield"),
 	Target = Window:AddTab("target", "crosshair"),
 	Grab = Window:AddTab("grab", "hand"),
@@ -1050,6 +1051,17 @@ DefenseExtra:AddToggle("LoopTP", {
 		end
 	end,
 })
+Tabs.Key:AddKeyBox(function(ReceivedKey)
+	-- KeyBox only takes the callback for the button, you need to implement your own key check inside the callback
+	local Success = ReceivedKey == "QwentlyCl"
+
+	print("Expected Key: Banana - Received Key:", ReceivedKey, "| Success:", Success)
+	Library:Notify({
+		Title = "Expected Key: Banana",
+		Description = "Received Key: " .. ReceivedKey .. "\nSuccess: " .. tostring(Success),
+		Time = 4,
+	})
+end)
 local TargetGroup = Tabs.Target:AddLeftGroupbox("Target Interaction")
 local BlobGroup = Tabs.Target:AddRightGroupbox("Blobman Kick")
 local WhitelistGroup = Tabs.Target:AddRightGroupbox("whitelist")
