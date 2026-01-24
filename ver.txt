@@ -16,7 +16,6 @@ local Window = Library:CreateWindow({
 	ShowCustomCursor = false,
 })
 local Tabs = {
-	Key = Window:AddKeyTab("Key System"),
 	Defense = Window:AddTab("defense", "shield"),
 	Target = Window:AddTab("target", "crosshair"),
 	Grab = Window:AddTab("grab", "hand"),
@@ -25,10 +24,18 @@ local Tabs = {
 	Build = Window:AddTab("build", "box"),
 	Fun = Window:AddTab("fun", "smile"),
 	Keybinds = Window:AddTab("keybinds", "keyboard"),
-	Notifications = Window:AddTab("notifications", "bell"),
+	Notifications = Window:AddTab("info", "info"),
 	Auras = Window:AddTab("auras", "sparkles"),
 	["UI Settings"] = Window:AddTab("UI Settings", "settings")
 }
+local InfoTab = Tabs.Notifications
+local OwnerBox = InfoTab:AddLeftGroupbox("Client Info")
+
+OwnerBox:AddLabel({ Text = "Owner: Qwently", DoesWrap = false })
+OwnerBox:AddLabel({ Text = "Build: Private Edition", DoesWrap = false })
+OwnerBox:AddDivider()
+OwnerBox:AddLabel({ Text = "Status: Active", DoesWrap = false })
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 local PS = game:GetService("Players")
@@ -690,8 +697,6 @@ DefenseExtra:AddToggle("AutoGucciToggle", {
 		end
 	end
 })
-
-
 --// TOY LIST (Short name -> Real name)
 local ToyList = {
 	["Coconut"]     = "FoodCoconut",
@@ -1051,17 +1056,6 @@ DefenseExtra:AddToggle("LoopTP", {
 		end
 	end,
 })
-Tabs.Key:AddKeyBox(function(ReceivedKey)
-	-- KeyBox only takes the callback for the button, you need to implement your own key check inside the callback
-	local Success = ReceivedKey == "QwentlyCl"
-
-	print("Expected Key: Banana - Received Key:", ReceivedKey, "| Success:", Success)
-	Library:Notify({
-		Title = "Expected Key: Banana",
-		Description = "Received Key: " .. ReceivedKey .. "\nSuccess: " .. tostring(Success),
-		Time = 4,
-	})
-end)
 local TargetGroup = Tabs.Target:AddLeftGroupbox("Target Interaction")
 local BlobGroup = Tabs.Target:AddRightGroupbox("Blobman Kick")
 local WhitelistGroup = Tabs.Target:AddRightGroupbox("whitelist")
