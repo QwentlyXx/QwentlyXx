@@ -8,12 +8,12 @@ local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))
 local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
 local Options = Library.Options
 local Toggles = Library.Toggles
-Library.ForceCheckbox = true
+Library.ForceCheckbox = false
 local Window = Library:CreateWindow({
 	Title = " Qwently Client",
 	Footer = "Qwently Client",
 	NotifySide = "Right",
-	ShowCustomCursor = false,
+	ShowCustomCursor = true,
 })
 local Tabs = {
 	Defense = Window:AddTab("defense", "shield"),
@@ -24,18 +24,10 @@ local Tabs = {
 	Build = Window:AddTab("build", "box"),
 	Fun = Window:AddTab("fun", "smile"),
 	Keybinds = Window:AddTab("keybinds", "keyboard"),
-	Notifications = Window:AddTab("info", "info"),
+	Notifications = Window:AddTab("notifications", "bell"),
 	Auras = Window:AddTab("auras", "sparkles"),
 	["UI Settings"] = Window:AddTab("UI Settings", "settings")
 }
-local InfoTab = Tabs.Notifications
-local OwnerBox = InfoTab:AddLeftGroupbox("Client Info")
-
-OwnerBox:AddLabel({ Text = "Owner: Qwently", DoesWrap = false })
-OwnerBox:AddLabel({ Text = "Build: Private Edition", DoesWrap = false })
-OwnerBox:AddDivider()
-OwnerBox:AddLabel({ Text = "Status: Active", DoesWrap = false })
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 local PS = game:GetService("Players")
@@ -697,6 +689,8 @@ DefenseExtra:AddToggle("AutoGucciToggle", {
 		end
 	end
 })
+
+
 --// TOY LIST (Short name -> Real name)
 local ToyList = {
 	["Coconut"]     = "FoodCoconut",
