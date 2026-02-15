@@ -1,3 +1,6 @@
+sendmessage = true
+local camera = workspace.CurrentCamera
+camera.FieldOfView = 120
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local CoreGui = game:GetService("CoreGui")
@@ -15,6 +18,8 @@ local Window = Library:CreateWindow({
 	NotifySide = "Right",
 	ShowCustomCursor = false,
 })
+if sendmessage then chatMessage("♡QwentlyClient loaded♡") end
+
 local Tabs = {
 	Defense = Window:AddTab("defense", "shield"),
 	Target = Window:AddTab("target", "crosshair"),
@@ -35,6 +40,49 @@ OwnerBox:AddLabel({ Text = "Owner: Qwently", DoesWrap = false })
 OwnerBox:AddLabel({ Text = "Build: Private Edition", DoesWrap = false })
 OwnerBox:AddDivider()
 OwnerBox:AddLabel({ Text = "Status: Active", DoesWrap = false })
+OwnerBox:AddDivider()
+
+-- Guns.lol Button
+OwnerBox:AddButton({
+    Text = "Copy guns.lol",
+    Func = function()
+        setclipboard("https://guns.lol/qwently")
+        Library:Notify({
+            Title = "Copied",
+            Description = "guns.lol link copied to clipboard",
+            Time = 3
+        })
+    end
+})
+
+-- Discord User Button
+OwnerBox:AddButton({
+    Text = "Copy Discord",
+    Func = function()
+        setclipboard("Qwentlysha")
+        Library:Notify({
+            Title = "Copied",
+            Description = "Discord username copied to clipboard",
+            Time = 3
+        })
+    end
+})
+
+-- Discord Server Button (NEW)
+OwnerBox:AddButton({
+    Text = "Copy Discord Server",
+    Func = function()
+        setclipboard("test") -- ссылка на твой сервер
+        Library:Notify({
+            Title = "Copied",
+            Description = "Discord server link copied to clipboard",
+            Time = 3
+        })
+    end
+})
+
+OwnerBox:AddDivider()
+OwnerBox:AddLabel({ Text = "", DoesWrap = false })
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
